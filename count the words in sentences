@@ -1,0 +1,6 @@
+sentence = "I love learning Python"
+count = 0
+k = sentence.split()
+for i in k:
+    count+=1
+print(count)
