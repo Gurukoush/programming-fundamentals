@@ -1,1 +1,13 @@
+arr = [1,2,3,4,5]
+n = len(arr)
+max_ele = arr[0]
+for i in range(n):
+    if arr[i]>max_ele:
+        max_ele = arr[i]
+arr.remove(max_ele)
 
+min_ele = arr[0]
+for j in range(n-1):
+    if arr[j]>min_ele:
+        min_ele = arr[j]
+print(min_ele)
