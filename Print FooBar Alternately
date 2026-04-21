@@ -1,0 +1,25 @@
+import threading
+
+class FooBar:
+    def __init__(self, n):
+        self.n = n
+        self.turn = 0
+        self.cond = threading.Condition()
+
+    def foo(self, printFoo):
+        for _ in range(self.n):
+            with self.cond:
+                while self.turn != 0:
+                    self.cond.wait()
+                printFoo()
+                self.turn = 1
+                self.cond.notify()
+
+    def bar(self, printBar):
+        for _ in range(self.n):
+            with self.cond:
+                while self.turn != 1:
+                    self.cond.wait()
+                printBar()
+                self.turn = 0
+                self.cond.notify()
