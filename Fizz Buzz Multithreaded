@@ -1,0 +1,59 @@
+from threading import Condition
+
+class FizzBuzz:
+    def __init__(self, n: int):
+        self.n = n
+        self.curr = 1
+        self.cv = Condition()
+
+    def fizz(self, printFizz):
+        while True:
+            with self.cv:
+                while self.curr <= self.n and not (self.curr % 3 == 0 and self.curr % 5 != 0):
+                    self.cv.wait()
+
+                if self.curr > self.n:
+                    return
+
+                printFizz()
+                self.curr += 1
+                self.cv.notify_all()
+
+    def buzz(self, printBuzz):
+        while True:
+            with self.cv:
+                while self.curr <= self.n and not (self.curr % 5 == 0 and self.curr % 3 != 0):
+                    self.cv.wait()
+
+                if self.curr > self.n:
+                    return
+
+                printBuzz()
+                self.curr += 1
+                self.cv.notify_all()
+
+    def fizzbuzz(self, printFizzBuzz):
+        while True:
+            with self.cv:
+                while self.curr <= self.n and not (self.curr % 15 == 0):
+                    self.cv.wait()
+
+                if self.curr > self.n:
+                    return
+
+                printFizzBuzz()
+                self.curr += 1
+                self.cv.notify_all()
+
+    def number(self, printNumber):
+        while True:
+            with self.cv:
+                while self.curr <= self.n and not (self.curr % 3 != 0 and self.curr % 5 != 0):
+                    self.cv.wait()
+
+                if self.curr > self.n:
+                    return
+
+                printNumber(self.curr)
+                self.curr += 1
+                self.cv.notify_all()
