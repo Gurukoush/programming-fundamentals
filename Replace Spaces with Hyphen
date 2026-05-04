@@ -1,0 +1,8 @@
+str = "hello world"
+k = ""
+for i in str:
+    if i == " ":
+        k+="-"
+    else:
+        k+=i
+print(k)
