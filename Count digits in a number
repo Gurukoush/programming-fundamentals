@@ -1,0 +1,3 @@
+N = 12345
+k = str(N)
+print(len(k))
